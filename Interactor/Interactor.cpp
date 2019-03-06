@@ -40,8 +40,6 @@ public:
 
 template<typename _SUBJECT, typename _STATUS = bool>
 class Tool {
-	public:
-	typedef _STATUS STATUS;
 protected:
 	_SUBJECT* subject_ = nullptr;
 	_STATUS status_;///< default status ? Good really ?
@@ -125,7 +123,39 @@ public:
 	}
 };
 
+/** This is supposed to be a dispatcher for user input events.
+ * Basically it can contain multiple Interactors to perform any kind of 
+ * operations on any kind of objects.
+ * This class is an example
+ * TODO : Is that the worst name you ever heard for a class or what ?*/
+class UserEventDispatcher{
+	public:
+	
+	typedef enum{MODE_ONE, MODE_TWO, MODE_THREE} INTERACTION_MODE;
+	
+	private:
+	Graph graph_;
+	INTERACTION_MODE mode_;
+	Interactor<Graph> interactor_;
+	
 
+	public:
+	
+	UserInputToCodeInterface() : {}
+	
+	/** _WHAT defines on what the user clicked*/
+	template<typename _WHAT>
+	void mouse_click(_WHAT what){
+		Vertex v = what.vertex();
+		switch (mode_){
+			case MODE_ONE : interactor_.start_operation<MoveVertex>(v); break;
+			default : {//do nothing
+			break;}
+		}
+	}
+	
+	void tick();
+};
 
 int main()
 {
