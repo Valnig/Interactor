@@ -1,0 +1,4 @@
+Debug/
+*.o
+x64/
+*.opendb
