@@ -6,6 +6,10 @@
 #include <utility>
 #include <stdexcept>
 
+//TODO
+/* Investigate notion of TRIGGER. To a single trigger various interactions, to a single interaction various trigger. 
+cf. 'clicked on this object' vs. 'clicked on this other object'
+those could mean a different behaviour*/
 
 
 template<typename _SUBJECT>

@@ -1,8 +1,6 @@
 #pragma once
 
 
-
-
 template<typename _SUBJECT, typename _TOOL>
 class Interaction {
 	_TOOL* tool_;
@@ -10,8 +8,8 @@ class Interaction {
 public:
 
 	template<typename ... _ARGS>
-	Interaction(_ARGS ... args) {
-		tool_ = new _TOOL();
+	Interaction(_SUBJECT* subject, _ARGS ... args) {
+		tool_ = new _TOOL(subject);
 		tool_->start(args...);
 	}
 
@@ -29,6 +27,10 @@ public:
 			tool_->stop(args...);
 			delete tool_;
 		}
+	}
+
+	typename _TOOL::STATUS status() {
+		return tool_->status_;
 	}
 
 };
